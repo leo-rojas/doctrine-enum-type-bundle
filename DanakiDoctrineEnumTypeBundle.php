@@ -23,9 +23,9 @@ class DanakiDoctrineEnumTypeBundle extends Bundle
         }
 
         foreach ($this->container->getParameter('danaki_doctrine_enum_type.types') as $typeName => $enumConfig) {
-            $typeName = \is_string($typeName) ? $typeName : $enumConfig['enumClass'];
-            $typeClass = $enumConfig['typeClass'];
-            $enumClass = $enumConfig['enumClass'];
+            $typeName = \is_string($typeName) ? $typeName : $enumConfig['enum_class'];
+            $typeClass = $enumConfig['type_class'];
+            $enumClass = $enumConfig['enum_class'];
             if (! Type::hasType($typeName)) {
                 $typeClass::registerEnumType($typeName, $enumClass);
             }
