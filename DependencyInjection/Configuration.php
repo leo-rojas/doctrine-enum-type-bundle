@@ -29,13 +29,20 @@ class Configuration implements ConfigurationInterface
                         ->beforeNormalization()
                             ->ifString()
                             ->then(function ($v) {
-                                return ['enumClass' => $v, 'typeClass' => PhpEnumType::class];
+                                return ['enum_class' => $v, 'type_class' => PhpEnumType::class];
                             })
                         ->end()
                         ->children()
-                            ->scalarNode('enumClass')->isRequired()->end()
-                            ->scalarNode('typeClass')->isRequired()->end()
+                            ->scalarNode('enum_class')->isRequired()->end()
+                            ->scalarNode('type_class')->isRequired()->end()
                         ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('custom_types')
+                    ->useAttributeAsKey('name')
+                    ->arrayPrototype()
+                        ->useAttributeAsKey('name')
+                        ->prototype('scalar')->end()
                     ->end()
                 ->end()
             ->end()

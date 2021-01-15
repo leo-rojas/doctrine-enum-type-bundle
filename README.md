@@ -17,8 +17,19 @@ danaki_doctrine_enum_type:
         php_enum_gender: Acelaya\Enum\Gender
         App\Enum\YourEnum: ~
         php_enum_flag:
-            enumClass: Acelaya\Enum\Flag
-            typeClass: App\Doctrine\Types\NumericPhpEnumType
+            enum_class: App\Enum\Flag
+            type_class: App\Doctrine\Types\NumericPhpEnumType
+
+    # For easier configuring when there's many enums using the same custom type class
+    custom_types:
+        App\Doctrine\Types\NumericPhpEnumType:
+            php_enum_flag: App\Enum\Flag
+            custom_some_other_enum_using_number: App\Enum\SomeOtherEnumUsingNumber
+            custom_one_more_enum_using_number: App\Enum\OneMoreEnumUsingANumber
+        App\Doctrine\Types\SomeOtherCustomPhpEnumType:
+            custom_enum_one: App\Enum\CustomEnumOne
+            custom_enum_two: App\Enum\CustomEnumTwo
+
 ```
 
 ## Problems
