@@ -16,6 +16,9 @@ danaki_doctrine_enum_type:
     types:
         php_enum_gender: Acelaya\Enum\Gender
         App\Enum\YourEnum: ~
+        php_enum_flag:
+            enumClass: Acelaya\Enum\Flag
+            typeClass: App\Doctrine\Types\NumericPhpEnumType
 ```
 
 ## Problems
