@@ -2,6 +2,7 @@
 
 namespace Danaki\DoctrineEnumTypeBundle\DependencyInjection;
 
+use Acelaya\Doctrine\Type\PhpEnumType;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -22,10 +23,21 @@ class Configuration implements ConfigurationInterface
         }
 
         $rootNode->children()
-                    ->arrayNode('types')
-                        ->useAttributeAsKey('name')
-                        ->prototype('scalar')->end()
+                ->arrayNode('types')
+                    ->useAttributeAsKey('name')
+                    ->arrayPrototype()
+                        ->beforeNormalization()
+                            ->ifString()
+                            ->then(function ($v) {
+                                return ['enumClass' => $v, 'typeClass' => PhpEnumType::class];
+                            })
+                        ->end()
+                        ->children()
+                            ->scalarNode('enumClass')->isRequired()->end()
+                            ->scalarNode('typeClass')->isRequired()->end()
+                        ->end()
                     ->end()
+                ->end()
             ->end()
         ->end();
 
